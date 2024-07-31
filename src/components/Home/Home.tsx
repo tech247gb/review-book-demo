@@ -5,6 +5,7 @@ import ReadReviewModal from '../Modal/ReadReview/ReadReviewModal';
 import { WELCOME_MESSAGE, WELCOME_TEXT, EXPLORE_BUTTON_TEXT } from '../../constants/ConstantTexts'
 import ReviewSkeleton from '../Skeltons/ReviewSkelton';
 import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
+import { FEATURED_REVIEWS } from '../../constants/ConstantTexts';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -81,7 +82,7 @@ const Home: React.FC = () => {
             </header>
 
             <section className="p-8">
-                <h2 className="text-3xl font-bold mb-6 text-center animate__animated animate__fadeIn">Featured Books</h2>
+                <h2 className="text-3xl font-bold mb-6 text-center animate__animated animate__fadeIn">{ FEATURED_REVIEWS }</h2>
                 <div className="flex flex-wrap gap-8 justify-center">
                     {
                         loading ? (<LoadingSkeleton size={PAGE_SIZE} width={80} />) : (

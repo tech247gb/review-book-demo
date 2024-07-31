@@ -60,8 +60,8 @@ const ManageProfile: React.FC = () => {
     };
 
     return (
-        <div className='h-screen flex items-center'>
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg mx-auto">
+        <div className='h-screen flex items-center bg-slate-100'>
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg mx-auto w-96">
             {successMessage && (
                 <p className="text-green-500 text-lg mb-4">{successMessage}</p>
             )}

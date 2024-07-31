@@ -91,7 +91,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ name, email }) => {
     }
 
     return (
-      <div className="flex items-center justify-center bg-primary text-white w-8 h-8 rounded-full font-bold border border-gray-300 shadow-md">
+      <div className="flex items-center justify-center bg-white text-primary w-8 h-8 rounded-full font-bold border border-gray-300 shadow-md">
         {initial}
       </div>
     );
@@ -110,7 +110,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ name, email }) => {
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className="sr-only">Open user menu</span>
-        {renderProfileIcon()}
+          {renderProfileIcon()}
         </button>
       </div>
       {isOpen && (
@@ -138,12 +138,6 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ name, email }) => {
                   className="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
                 >
                   Manage Profile
-                </button>
-                <button
-                  onClick={() => handleNavigation('/user/review-book')}
-                  className="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
-                >
-                  Review a Book
                 </button>
 
                 <button

@@ -42,14 +42,14 @@ const Registration: React.FC = () => {
         if (Object.keys(newErrors).length === 0) {
             try {
                 await axios.post(`${BACKEND_API_URL}/api/auth/signup`, { username: name, email, password });
-                setMessage({ type: 'success', text: ' Registration successful! Redirecting to login...' });
+                setMessage({ type: 'success', text: 'Registration successful! Redirecting to login...' });
 
                 setTimeout(() => {
                     setMessage(null);
                     navigate('/login');
                 }, 3000);
             } catch (error: any) {
-                const errorMessage = error.response?.data?.message || ' Registration failed. Please try again.';
+                const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.';
                 setMessage({ type: 'error', text: errorMessage });
                 setTimeout(() => {
                     setMessage(null);
@@ -91,7 +91,7 @@ const Registration: React.FC = () => {
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
                 {message && (
                     <div className={`border px-4 py-3 rounded relative mb-4 ${message.type === 'success' ? 'bg-green-100 border-green-400 text-green-700' : 'bg-red-100 border-red-400 text-red-700'}`}>
-                        <strong className="font-bold">{message.type === 'success' ? 'Success!' : 'Error!'}</strong>
+                        <strong className="font-bold">{message.type === 'success' ? 'Success! ' : 'Error! '}</strong>
                         <span className="block sm:inline">{message.text}</span>
                     </div>
                 )}
