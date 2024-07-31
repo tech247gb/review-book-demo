@@ -28,7 +28,7 @@ const AppRouter: React.FC = () => {
                 <SearchContextProvider>
                     <Layout>
                         <Routes>
-                            <Route path="/" element={<Home />} />
+                            <Route path="/" element={ <Home /> } />
                             <Route path="/books" element={
                                 <Suspense fallback={<Spinner />}>
                                     <BookList />
