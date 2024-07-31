@@ -14,7 +14,7 @@ const PopupModal: React.FC<PopupModalPropos> = ({ isOpen, onClose, onConfirm, ti
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="fixed inset-0 bg-black opacity-50"></div>
-      <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+      <div className="w-80 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
         <div className="bg-primary px-4 py-3">
           <h3 className="text-lg leading-6 font-medium text-white">{title}</h3>
         </div>
