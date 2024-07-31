@@ -3,6 +3,7 @@ import StarRating from '../StarRating/StarRating';
 import axios from 'axios';
 import { useSearch } from '../../context/SearchContext';
 import Spinner from '../Spinner/Spinner';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -87,26 +88,24 @@ const BookList: React.FC = () => {
                                     <p className="text-center text-gray-600">No reviews available.</p>
                                 )}
                             </div>
-                            <div className="mt-8 flex justify-center">
-                                <div className="flex justify-between mt-4">
-                                    <button
-                                        onClick={() => handlePageChange(currentPage - 1)}
-                                        disabled={currentPage === 1}
-                                        className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
-                                    >
-                                        Previous
-                                    </button>
-                                    <span className="text-gray-700">
-                                        Page {currentPage} of {totalPages}
-                                    </span>
-                                    <button
-                                        onClick={() => handlePageChange(currentPage + 1)}
-                                        disabled={currentPage === totalPages}
-                                        className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
-                                    >
-                                        Next
-                                    </button>
-                                </div>
+                            <div className="mt-8 flex justify-around p-12">
+                                <button
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                    disabled={currentPage === 1}
+                                    className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
+                                >
+                                    <FaArrowLeft />
+                                </button>
+                                <span className="text-gray-700">
+                                    Page {currentPage} of {totalPages}
+                                </span>
+                                <button
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                    disabled={currentPage === totalPages}
+                                    className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
+                                >
+                                    <FaArrowRight />
+                                </button>
                             </div>
                         </div>
                     )
