@@ -17,6 +17,8 @@ interface Book {
     coverImage: string;
     rating: number;
 }
+const PAGE_SIZE = 5
+const RECENT_REVIEWS_LENGTH =2
 
 const Home: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
@@ -31,7 +33,7 @@ const Home: React.FC = () => {
                 const response = await axios.get(`${BACKEND_API_URL}/api/review/get-all-reviews`, {
                     params: {
                         page: 1,
-                        limit: 5
+                        limit: PAGE_SIZE
                     }
                 });
 
@@ -82,7 +84,7 @@ const Home: React.FC = () => {
                 <h2 className="text-3xl font-bold mb-6 text-center animate__animated animate__fadeIn">Featured Books</h2>
                 <div className="flex flex-wrap gap-8 justify-center">
                     {
-                        loading ? (<LoadingSkeleton size={5} width={80} />) : (
+                        loading ? (<LoadingSkeleton size={PAGE_SIZE} width={80} />) : (
                             books.map((book) => (
                                 <Link to={`/reviews/${book.id}`} className="text-blue-600">
                                     <div className="bg-white p-4 rounded-lg shadow-lg w-80 h-[300px] transform transition-transform duration-300 hover:scale-105 animate__animated animate__fadeIn animate__delay-1s">
@@ -106,7 +108,7 @@ const Home: React.FC = () => {
                 <div className="flex flex-wrap gap-8 justify-center">
                     {/* Repeat similar blocks for other recent reviews */}
                     {
-                        loading ? (<ReviewSkeleton size={2} width={64} height={150} />) : (
+                        loading ? (<ReviewSkeleton size={RECENT_REVIEWS_LENGTH} width={64} height={150} />) : (
                             recentReviews.map((book) => (
                                 <div className="bg-white p-4 rounded-lg shadow-lg w-64 h-[150px] transform transition-transform duration-300 hover:scale-105 animate__animated animate__fadeIn animate__delay-2s">
                                     <h3 className="text-xl font-semibold mb-2">{book.title}</h3>

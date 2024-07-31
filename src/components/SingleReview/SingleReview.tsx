@@ -12,6 +12,7 @@ interface Review {
     coverImage: string;
     author: string;
     rating: number;
+    reviewText?:string
 }
 
 const SingleReview: React.FC = () => {
@@ -56,7 +57,7 @@ const SingleReview: React.FC = () => {
                                         </div>
                                         <h1 className="text-4xl font-bold mb-4">{review.title}</h1>
                                         <h2 className="text-2xl text-gray-700 mb-4">by {review.author}</h2>
-                                        <p className="text-gray-600 mb-6 whitespace-pre-line">{review.content}</p>
+                                        <p className="text-gray-600 mb-6 whitespace-pre-line">{review.reviewText}</p>
                                     </div>
                                 </div>
                             )
