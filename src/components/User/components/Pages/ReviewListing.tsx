@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../../Spinner/Spinner';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import DeleteConfirmationModal from '../Modal/ConfirmDeleteModal';
+import PopupModal from '../Modal/PopupModal';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -149,7 +149,7 @@ const ReviewListing: React.FC = () => {
 
                         {/* Pagination Controls */}
                         {reviews.length > 0 && (
-                            <div className='relative'>
+                            <div className='relative p-3'>
                                 <div className="flex justify-between">
                                     <button
                                         onClick={() => handlePageChange(currentPage - 1)}
@@ -176,12 +176,12 @@ const ReviewListing: React.FC = () => {
             )}
 
             {/* Delete Confirmation Modal */}
-            <DeleteConfirmationModal
+            <PopupModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onConfirm={handleDelete}
                 title="Confirm Deletion"
-                itemName={selectedReviewTitle || ''}
+                description={`Are you sure you want to delete "${selectedReviewTitle ||''}"? This action cannot be undone.`}
             />
         </>
     );

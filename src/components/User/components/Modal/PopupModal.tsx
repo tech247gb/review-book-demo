@@ -1,14 +1,14 @@
 import React from 'react';
 
-interface DeleteConfirmationModalProps {
+interface PopupModalPropos {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   title: string;
-  itemName: string;
+  description?:string
 }
 
-const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({ isOpen, onClose, onConfirm, title, itemName }) => {
+const PopupModal: React.FC<PopupModalPropos> = ({ isOpen, onClose, onConfirm, title, description }) => {
   if (!isOpen) return null;
 
   return (
@@ -19,7 +19,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({ isOpe
           <h3 className="text-lg leading-6 font-medium text-white">{title}</h3>
         </div>
         <div className="px-4 py-5 sm:p-6">
-          <p className="text-sm text-gray-500">Are you sure you want to delete "{itemName}"? This action cannot be undone.</p>
+          <p className="text-sm text-gray-500">{description}</p>
         </div>
         <div className="px-4 py-3 bg-white sm:px-6 sm:flex sm:flex-row-reverse">
           <button
@@ -40,4 +40,4 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({ isOpe
   );
 };
 
-export default DeleteConfirmationModal;
+export default PopupModal;

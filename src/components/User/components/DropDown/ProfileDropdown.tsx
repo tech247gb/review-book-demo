@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../../context/AuthContext';
-import Modal from '../Modal/LogoutModal';
+import PopupModal from '../Modal/PopupModal';
 
 interface ProfileDropdownProps {
   name: string;
@@ -165,7 +165,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ name, email }) => {
           </div>
         </div>
       )}
-      <Modal
+      <PopupModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={confirmLogout}
