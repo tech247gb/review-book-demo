@@ -78,7 +78,7 @@ const ReviewListing: React.FC = () => {
             {loading ? (
                 <Spinner />
             ) : (
-                <div className='h-screen flex flex-col'>
+                <div className='flex flex-col'>
                     <div className="w-full p-6 bg-gray-100 flex flex-col flex-grow">
                         <div className='flex justify-between mb-5'>
                             <h2 className="text-3xl font-bold">Your Reviews</h2>
@@ -107,7 +107,7 @@ const ReviewListing: React.FC = () => {
                                             <tr key={review._id} className="hover:bg-gray-50">
                                                 <td className="py-4 px-4 border-b">{review.title}</td>
                                                 <td className="py-4 px-4 border-b">{review.author}</td>
-                                                <td className="py-4 px-4 border-b">{review.reviewText}</td>
+                                                <td className="py-4 px-4 border-b"><p>{review.reviewText}</p></td>
                                                 <td className="py-4 px-4 border-b">{review.rating} Star{review.rating > 1 ? 's' : ''}</td>
                                                 <td className="py-4 px-4 border-b">
                                                     <div className="flex space-x-2">
@@ -138,7 +138,7 @@ const ReviewListing: React.FC = () => {
 
                         {/* Pagination Controls */}
                         {reviews.length > 0 && (
-                            <div className='relative bottom-60'>
+                            <div className='relative'>
                                 <div className="flex justify-between">
                                     <button
                                         onClick={() => handlePageChange(currentPage - 1)}
