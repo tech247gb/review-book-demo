@@ -41,20 +41,16 @@ const Registration: React.FC = () => {
 
         if (Object.keys(newErrors).length === 0) {
             try {
-                const response = await axios.post(`${BACKEND_API_URL}/api/auth/signup`, { username: name, email, password });
-                console.log('Registration successful:', response.data);
-
-                setMessage({ type: 'success', text: 'Registration successful! Redirecting to login...' });
+                await axios.post(`${BACKEND_API_URL}/api/auth/signup`, { username: name, email, password });
+                setMessage({ type: 'success', text: ' Registration successful! Redirecting to login...' });
 
                 setTimeout(() => {
                     setMessage(null);
                     navigate('/login');
                 }, 3000);
             } catch (error: any) {
-                const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.';
+                const errorMessage = error.response?.data?.message || ' Registration failed. Please try again.';
                 setMessage({ type: 'error', text: errorMessage });
-                console.error('Error during registration:', error);
-
                 setTimeout(() => {
                     setMessage(null);
                 }, 3000);

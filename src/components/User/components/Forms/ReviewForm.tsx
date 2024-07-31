@@ -22,8 +22,7 @@ const ReviewForm: React.FC = () => {
         try {
             const token = localStorage.getItem('token'); 
             
-            // Make the POST request to add the review
-            const response = await axios.post(
+            await axios.post(
                 `${BACKEND_API_URL}/api/review/add-review`,
                 {
                     title: bookTitle,
@@ -33,7 +32,7 @@ const ReviewForm: React.FC = () => {
                 },
                 {
                     headers: {
-                        Authorization: `Bearer ${token}` // Attach the token if authentication is required
+                        Authorization: `Bearer ${token}`
                     }
                 }
             );

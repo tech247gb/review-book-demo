@@ -9,7 +9,6 @@ const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 const PrivateRoute: React.FC = () => {
     const { isAuthenticated, setIsAuthenticated } = useAuthContext();
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -29,7 +28,6 @@ const PrivateRoute: React.FC = () => {
             } catch (error) {
                 // Token is invalid or expired, redirect to login
                 setIsAuthenticated(false);
-                setError('Session expired or invalid token. Please log in again.');
             } finally {
                 setLoading(false);
             }
