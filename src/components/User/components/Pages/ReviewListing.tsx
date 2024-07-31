@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../../Spinner/Spinner';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import DeleteConfirmationModal from '../Modal/ConfirmDeleteModal';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -12,6 +13,9 @@ const ReviewListing: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedReviewId, setSelectedReviewId] = useState<number | null>(null);
+    const [selectedReviewTitle, setSelectedReviewTitle] = useState<string | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -43,16 +47,23 @@ const ReviewListing: React.FC = () => {
         navigate(path);
     };
 
-    const handleDelete = async (id: number) => {
-        if (window.confirm('Are you sure you want to delete this review?')) {
+    const openDeleteModal = (reviewId: number, reviewTitle: string) => {
+        setSelectedReviewId(reviewId);
+        setSelectedReviewTitle(reviewTitle);
+        setIsModalOpen(true);
+    };
+
+    const handleDelete = async () => {
+        if (selectedReviewId !== null) {
             try {
                 const token = localStorage.getItem('token');
-                await axios.delete(`${BACKEND_API_URL}/api/review/delete-review/${id}`, {
+                await axios.delete(`${BACKEND_API_URL}/api/review/delete-review/${selectedReviewId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     }
                 });
-                setReviews(reviews.filter(review => review._id !== id));
+                setReviews(reviews.filter(review => review._id !== selectedReviewId));
+                setIsModalOpen(false);
             } catch (err) {
                 setError('Failed to delete review. Please try again.');
             }
@@ -118,7 +129,7 @@ const ReviewListing: React.FC = () => {
                                                             Update
                                                         </button>
                                                         <button
-                                                            onClick={() => handleDelete(review._id)}
+                                                            onClick={() => openDeleteModal(review._id, review.title)}
                                                             className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                                                         >
                                                             Delete
@@ -163,6 +174,15 @@ const ReviewListing: React.FC = () => {
                     </div>
                 </div>
             )}
+
+            {/* Delete Confirmation Modal */}
+            <DeleteConfirmationModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onConfirm={handleDelete}
+                title="Confirm Deletion"
+                itemName={selectedReviewTitle || ''}
+            />
         </>
     );
 };

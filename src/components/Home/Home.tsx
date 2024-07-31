@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ReadReviewModal from '../Modal/ReadReview/ReadReviewModal';
-import { WELCOME_MESSAGE, WELCOME_TEXT, EXPLORE_BUTTON_TEXT } from '../../constants/ConstantTexts'
+import { WELCOME_MESSAGE, WELCOME_TEXT, EXPLORE_BUTTON_TEXT, FEATURED_REVIEWS } from '../../constants/ConstantTexts'
 import ReviewSkeleton from '../Skeltons/ReviewSkelton';
 import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
-import { FEATURED_REVIEWS } from '../../constants/ConstantTexts';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -18,7 +17,7 @@ interface Book {
     coverImage: string;
     rating: number;
 }
-const PAGE_SIZE = 5
+const PAGE_SIZE = 4
 const RECENT_REVIEWS_LENGTH =2
 
 const Home: React.FC = () => {
@@ -49,7 +48,7 @@ const Home: React.FC = () => {
                 const recent = [...fetchedReviews];
                 setLoading(false)
                 setBooks(fetchedReviews);
-                setRecentReviews(recent.slice(3));
+                setRecentReviews(recent.slice(2));
             } catch (error) {
                 setLoading(false)
                 console.error('Error fetching reviews:', error);
@@ -111,7 +110,7 @@ const Home: React.FC = () => {
                     {
                         loading ? (<ReviewSkeleton size={RECENT_REVIEWS_LENGTH} width={64} height={150} />) : (
                             recentReviews.map((book) => (
-                                <div className="bg-white p-4 rounded-lg shadow-lg w-64 h-[150px] transform transition-transform duration-300 hover:scale-105 animate__animated animate__fadeIn animate__delay-2s">
+                                <div className="bg-white p-4 rounded-lg shadow-lg w-64 h-auto transform transition-transform duration-300 hover:scale-105 animate__animated animate__fadeIn animate__delay-2s">
                                     <h3 className="text-xl font-semibold mb-2">{book.title}</h3>
                                     <p className="text-gray-700 mb-4 line-clamp-3">{book.review}</p>
                                     <button className="text-blue-600 hover:underline" onClick={() => openModal(book.review)}>Read full review</button>

@@ -59,7 +59,7 @@ const ReviewForm: React.FC = () => {
     };
 
     return (
-        <div className='h-screen flex items-center'>
+        <div className='h-screen flex items-center bg-slate-200'>
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full mx-auto">
             {success && (
                 <p className="text-green-500 text-lg mb-4">{success}</p>
