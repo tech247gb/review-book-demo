@@ -20,7 +20,7 @@ const ReadReviewModal: React.FC<ModalProps> = ({ isOpen, onClose, review }) => {
             <h3 className="text-lg leading-6 font-medium text-white">{review.title}</h3>
             <button className="modal-close text-white" onClick={onClose}>X</button>
           </div>
-          <div className="px-4 py-5 sm:p-6 overflow-auto max-h-[250px] ">
+          <div className="px-4 py-5 sm:p-6 overflow-auto max-h-[250px] mx-2 my-2">
             <p className="text-sm text-gray-500">{review.review}</p>
           </div>
         </div>
