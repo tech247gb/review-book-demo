@@ -9,7 +9,7 @@ import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 
-interface Book {
+export interface Book {
     id: number;
     title: string;
     author: string;
@@ -24,7 +24,7 @@ const Home: React.FC = () => {
     const [books, setBooks] = useState<Book[]>([]);
     const [recentReviews, setRecentReviews] = useState<Book[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalContent, setModalContent] = useState<string>('');
+    const [modalContent, setModalContent] = useState<Book | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -58,12 +58,14 @@ const Home: React.FC = () => {
         fetchReviews();
     }, []);
 
-    const openModal = (reviewText: string) => {
-        setModalContent(reviewText);
+    const openModal = (review: Book) => {
+        document.body.classList.add('overflow-hidden')
+        setModalContent(review);
         setIsModalOpen(true);
     };
 
     const closeModal = () => {
+        document.body.classList.remove('overflow-hidden')
         setIsModalOpen(false);
     };
 
@@ -113,7 +115,7 @@ const Home: React.FC = () => {
                                 <div className="bg-white p-4 rounded-lg shadow-lg w-64 h-auto transform transition-transform duration-300 hover:scale-105 animate__animated animate__fadeIn animate__delay-2s">
                                     <h3 className="text-xl font-semibold mb-2">{book.title}</h3>
                                     <p className="text-gray-700 mb-4 line-clamp-3">{book.review}</p>
-                                    <button className="text-blue-600 hover:underline" onClick={() => openModal(book.review)}>Read full review</button>
+                                    <button className="text-blue-600 hover:underline" onClick={() => openModal(book)}>Read full review</button>
                                 </div>
                             ))
                         )
@@ -126,7 +128,7 @@ const Home: React.FC = () => {
             <ReadReviewModal
                 isOpen={isModalOpen}
                 onClose={closeModal}
-                content={modalContent}
+                review={modalContent}
             />
         </div>
     );
