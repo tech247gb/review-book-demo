@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useSearch } from '../../context/SearchContext';
 import Spinner from '../Spinner/Spinner';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -66,12 +67,12 @@ const BookList: React.FC = () => {
 
     return (
         <>
-            {
-                loading ? (<Spinner />)
-                    : (
-                        <div className="container mx-auto px-4 mb-20 mt-10">
-                            <h2 className="text-4xl font-bold mb-6 text-center text-primary">Reviews</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="container mx-auto px-4 mb-20 mt-10">
+                <h2 className="text-4xl font-bold mb-6 text-center text-primary">Reviews</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {
+                        loading ? (<LoadingSkeleton size={PAGE_SIZE} />) : (
+                            <>
                                 {books.length > 0 ? (
                                     books.map((book, index) => (
                                         <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
@@ -87,29 +88,32 @@ const BookList: React.FC = () => {
                                 ) : (
                                     <p className="text-center text-gray-600">No reviews available.</p>
                                 )}
-                            </div>
-                            <div className="mt-8 flex justify-around p-12">
-                                <button
-                                    onClick={() => handlePageChange(currentPage - 1)}
-                                    disabled={currentPage === 1}
-                                    className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
-                                >
-                                    <FaArrowLeft />
-                                </button>
-                                <span className="text-gray-700">
-                                    Page {currentPage} of {totalPages}
-                                </span>
-                                <button
-                                    onClick={() => handlePageChange(currentPage + 1)}
-                                    disabled={currentPage === totalPages}
-                                    className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
-                                >
-                                    <FaArrowRight />
-                                </button>
-                            </div>
-                        </div>
-                    )
-            }
+                            </>
+                        )
+                    }
+
+                </div>
+                <div className="mt-8 flex justify-around p-12">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
+                    >
+                        <FaArrowLeft />
+                    </button>
+                    <span className="text-gray-700">
+                        Page {currentPage} of {totalPages}
+                    </span>
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
+                    >
+                        <FaArrowRight />
+                    </button>
+                </div>
+            </div>
+
         </>
     );
 };

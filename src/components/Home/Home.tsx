@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ReadReviewModal from '../Modal/ReadReview/ReadReviewModal';
 import { WELCOME_MESSAGE, WELCOME_TEXT, EXPLORE_BUTTON_TEXT } from '../../constants/ConstantTexts'
 import ReviewSkeleton from '../Skeltons/ReviewSkelton';
+import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -80,9 +81,8 @@ const Home: React.FC = () => {
             <section className="p-8">
                 <h2 className="text-3xl font-bold mb-6 text-center animate__animated animate__fadeIn">Featured Books</h2>
                 <div className="flex flex-wrap gap-8 justify-center">
-
                     {
-                        loading ? (<ReviewSkeleton size={5} width={80} height={300} />) : (
+                        loading ? (<LoadingSkeleton size={5} width={80} />) : (
                             books.map((book) => (
                                 <Link to={`/reviews/${book.id}`} className="text-blue-600">
                                     <div className="bg-white p-4 rounded-lg shadow-lg w-80 h-[300px] transform transition-transform duration-300 hover:scale-105 animate__animated animate__fadeIn animate__delay-1s">
