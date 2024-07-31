@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 import axios from 'axios';
+import Spinner from '../components/Spinner/Spinner';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -38,7 +39,7 @@ const PrivateRoute: React.FC = () => {
     }, [setIsAuthenticated]);
 
     // Show a loading spinner or message while verifying
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <Spinner/>
 
     // Redirect to login page if not authenticated
     if (!isAuthenticated) return <Navigate to="/login" replace />;

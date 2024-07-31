@@ -3,6 +3,7 @@ import StarRating from '../StarRating/StarRating';
 import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import Spinner from '../Spinner/Spinner';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -62,7 +63,7 @@ const SearchResults: React.FC = () => {
         <div className="container mx-auto py-10 px-4">
             <h2 className="text-4xl font-bold mb-6 text-center text-primary">Book Reviews</h2>
             {loading ? (
-                <p className="text-center">Loading...</p>
+                <p className="text-center"><Spinner/></p>
             ) : error ? (
                 <p className="text-center text-red-600">{error}</p>
             ) : (
