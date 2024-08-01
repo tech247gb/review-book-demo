@@ -17,7 +17,7 @@ export interface Book {
     coverImage: string;
     rating: number;
 }
-const PAGE_SIZE = 4
+const PAGE_SIZE = 6
 const RECENT_REVIEWS_LENGTH =2
 
 const Home: React.FC = () => {
@@ -47,8 +47,8 @@ const Home: React.FC = () => {
                 }));
                 const recent = [...fetchedReviews];
                 setLoading(false)
-                setBooks(fetchedReviews);
-                setRecentReviews(recent.slice(2));
+                setBooks(fetchedReviews.slice(2));
+                setRecentReviews(recent.slice(0,2));
             } catch (error) {
                 setLoading(false)
                 console.error('Error fetching reviews:', error);
