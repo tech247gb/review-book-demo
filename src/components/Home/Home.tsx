@@ -81,7 +81,7 @@ const Home: React.FC = () => {
                     }
                 </div>
                 <div className="flex justify-center items-center mt-5">
-                    <Link to="/books" className="text-primary text-2xl mt-4 py-2 px-4 ">
+                    <Link to="/reviews" className="text-primary text-2xl mt-4 py-2 px-4 ">
                         {'View all'}
                     </Link>
                 </div>
