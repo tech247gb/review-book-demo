@@ -26,7 +26,7 @@ const SearchResults: React.FC = () => {
     const handleCloseModal = () => {
         setSelectedBook(null);
     };
-    if(!query) return <div className='min-h-screen flex items-center justify-center'> <p className='text-red-600'>No records found</p></div>
+    if(!query || booksSearchedDetails.booksSearched.length == 0) return <div className='min-h-screen flex items-center justify-center'> <p className='text-red-600'>No records found</p></div>
     return (
         <div className="container mx-auto py-10 px-4 min-h-screen">
             <h2 className="text-4xl font-bold mb-6 text-center text-primary">Book Reviews</h2>

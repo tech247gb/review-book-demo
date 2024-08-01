@@ -68,7 +68,7 @@ const ReviewForm: React.FC = () => {
         e.currentTarget.src = 'https://via.placeholder.com/400x600.png?text=No+Image'; // Fallback image URL
     };
     return (
-        <div className='flex items-center bg-slate-200'>
+        <div className='flex items-center bg-slate-200 min-h-screen'>
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full mx-auto">
                 {success && (
                     <p className="text-green-500 text-lg mb-4">{success}</p>
