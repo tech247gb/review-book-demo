@@ -52,7 +52,7 @@ const ReviewForm: React.FC = () => {
             // Hide success message after 3 seconds
             setTimeout(() => {
                 setSuccess('');
-                Navigate('/user/view-reviews');
+                navigate('/user/view-reviews');
             }, 3000);
         } catch (err) {
             // Handle error
