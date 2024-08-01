@@ -89,7 +89,7 @@ const ReviewListing: React.FC = () => {
             {loading ? (
                 <Spinner />
             ) : (
-                <div className='flex flex-col'>
+                <div className='flex flex-col min-h-screen'>
                     <div className="w-full p-6 bg-gray-100 flex flex-col flex-grow">
                         <div className='flex justify-between mb-5'>
                             <h2 className="text-3xl font-bold">Your Reviews</h2>
