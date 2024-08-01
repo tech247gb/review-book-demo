@@ -65,7 +65,7 @@ const Home: React.FC = () => {
 
             <FullScreenBanner backgroundImage={`/images/hero-background.jpg`} title={WELCOME_TEXT} subtitle={WELCOME_MESSAGE} />
 
-            <section className="container mx-auto">
+            <section className="container mx-auto p-4">
                 <h2 className="text-3xl font-bold mb-6 text-center animate__animated animate__fadeIn mt-6">{'Recent Reviews'}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {
@@ -83,7 +83,7 @@ const Home: React.FC = () => {
             </section>
 
             {/* Recent Reviews */}
-            <section className="container mx-auto my-8">
+            <section className="container mx-auto my-8 p-4">
                 <h2 className="text-3xl font-bold mb-6 text-center animate__animated animate__fadeIn">{FEATURED_REVIEWS}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
                     {/* Repeat similar blocks for other recent reviews */}
