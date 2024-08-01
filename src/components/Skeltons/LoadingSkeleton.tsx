@@ -4,15 +4,16 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 interface LoadingSkeletonProps {
     size?: number;
-    width?: number
+    width?: number;
+    minHeight?: string;
 }
-const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({ size = 1, width }) => {
+const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({ size = 1, width, minHeight }) => {
     return (
         <>
             {
                 Array(size).fill('').map((_) => {
                     return (
-                        <div className={`${width ? `bg-white w-${width}` : ''} max-w-lg rounded overflow-hidden shadow-lg`}>
+                        <div className={`${width ? `bg-white w-${width}` : ''} max-w-lg rounded overflow-hidden shadow-lg ${minHeight ?minHeight:``}`}>
                             <div className="bg-gray-200 h-48 flex items-center justify-center">
                                 <Skeleton width={100} height={32} />
                             </div>
