@@ -43,7 +43,7 @@ const Login: React.FC = () => {
                 localStorage.setItem('user', JSON.stringify(userDetails.data));
                 localStorage.setItem('token', token);
                 setIsAuthenticated(true)
-                navigate('/books');
+                navigate('/reviews');
             } catch (error) {
                 setLoginError('Invalid email or password');
                 setTimeout(() => {

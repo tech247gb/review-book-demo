@@ -45,10 +45,10 @@ const Header: React.FC = () => {
                 </button>
                 <nav className={`lg:flex ${menuOpen ? 'block' : 'hidden'} lg:items-center lg:space-x-4 w-full lg:w-auto`}>
                     <Link to="/" className="text-white hover:text-secondary block lg:inline-block mx-2 py-2">Home</Link>
-                    <Link to="/books" className="text-white hover:text-secondary block lg:inline-block mx-2 py-2">Reviews</Link>
+                    <Link to="/reviews" className="text-white hover:text-secondary block lg:inline-block mx-2 py-2">Reviews</Link>
                     {isAuthenticated && (<Link to="/user/view-reviews" className="text-white hover:text-secondary block lg:inline-block mx-2 py-2">My Reviews</Link>)}
 
-                    <div className={`flex items-center lg:ml-4 mt-2 lg:mt-0 w-full lg:w-auto ${location.pathname === '/books' ? 'justify-between' : 'justify-end'}`}>
+                    <div className={`flex items-center lg:ml-4 mt-2 lg:mt-0 w-full lg:w-auto ${location.pathname === '/reviews' ? 'justify-between' : 'justify-end'}`}>
                         <input
                             type="text"
                             placeholder="Search by titles or authors..."
