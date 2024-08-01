@@ -6,7 +6,6 @@ import BookReviewCard from '../BookReviewCard/BookReviewCard';
 import Modal from '../Modal/Modal';
 import FullScreenBanner from '../FullScreenBanner/FullScreenBanner';
 import { Book } from '../../types/Book';
-import { Link } from 'react-router-dom';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -61,10 +60,7 @@ const Home: React.FC = () => {
     };
     return (
         <div className="bg-gray-100">
-            {/* Hero Section */}
-
             <FullScreenBanner backgroundImage={`/images/hero-background.jpg`} title={WELCOME_TEXT} subtitle={WELCOME_MESSAGE} />
-
             <section className="container mx-auto p-4">
                 <h2 className="text-3xl font-bold mb-6 text-center animate__animated animate__fadeIn mt-6">{'Recent Reviews'}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import ImageThumb from '../../../ImageThumb/ImageThumb';
+import ImageThumbnail from '../../../ImageThumbnail/ImageThumbnail';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -120,7 +120,7 @@ const UpdateReviewForm: React.FC = () => {
                     />
                 </div>
                 {imageUrl && (
-                    <ImageThumb imageUrl={imageUrl} title={title}/>
+                    <ImageThumbnail imageUrl={imageUrl} title={title}/>
                 )}
 
             <button

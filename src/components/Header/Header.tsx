@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileDropdown from '../User/components/DropDown/ProfileDropdown';
 import { useSearch } from '../../context/SearchContext';

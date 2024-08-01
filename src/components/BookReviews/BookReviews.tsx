@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSearch } from '../../context/SearchContext';
@@ -15,10 +14,10 @@ const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 const PAGE_SIZE = 8;
 
-const BookList: React.FC = () => {
+const BookReviews: React.FC = () => {
 
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-    const { currentPageContext, setCurrentPageContext, setSearchQuery } = useSearch();
+    const { currentPageContext, setCurrentPageContext } = useSearch();
 
     const [books, setBooks] = useState<Book[]>([]);
     const [totalPages, setTotalPages] = useState(0);
@@ -60,7 +59,7 @@ const BookList: React.FC = () => {
         return () => {
             setCurrentPageContext(1)
         }
-    }, [])
+    })
 
     const handlePageChange = (selectedPage: { selected: number }) => {
         setCurrentPageContext(selectedPage.selected + 1);
@@ -117,4 +116,4 @@ const BookList: React.FC = () => {
     );
 };
 
-export default BookList;
+export default BookReviews;

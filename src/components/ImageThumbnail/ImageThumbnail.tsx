@@ -6,7 +6,7 @@ interface ImageThumbProps {
     title?: string;
 }
 
-const ImageThumb: React.FC<ImageThumbProps> = ({ imageUrl, title }) => {
+const ImageThumbnail: React.FC<ImageThumbProps> = ({ imageUrl, title }) => {
     const imgRef = useRef<HTMLImageElement>(null);
 
     const handleImageError = () => {
@@ -18,10 +18,10 @@ const ImageThumb: React.FC<ImageThumbProps> = ({ imageUrl, title }) => {
     return (
         <div>
             <div className="mb-6">
-                <img ref={imgRef} src={imageUrl} className="w-full h-48 object-cover" onError={handleImageError} />
+                <img ref={imgRef} src={imageUrl} alt={title} className="w-full h-48 object-cover" onError={handleImageError} />
             </div>
         </div>
     );
 };
 
-export default ImageThumb;
+export default ImageThumbnail;

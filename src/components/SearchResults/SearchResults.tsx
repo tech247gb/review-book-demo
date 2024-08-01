@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSearch } from '../../context/SearchContext';
-import { FaArrowLeft, FaArrowRight, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
 import ReactPaginate from 'react-paginate';
 import Modal from '../Modal/Modal';
@@ -11,11 +11,9 @@ import { Book } from '../../types/Book';
 const PAGE_SIZE = 6;
 
 const SearchResults: React.FC = () => {
-    // const [currentPage, setCurrentPage] = useState(1);
     const { query ,booksSearchedDetails } = useSearch();
     const { handleSearchContext  } = useSearch();
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-
 
     const handlePageChange = (selectedPage: { selected: number }) => {
         handleSearchContext(query ,selectedPage.selected + 1)
@@ -26,7 +24,7 @@ const SearchResults: React.FC = () => {
     const handleCloseModal = () => {
         setSelectedBook(null);
     };
-    if(!query || booksSearchedDetails.booksSearched.length == 0) return <div className='min-h-screen flex items-center justify-center'> <p className='text-red-600'>No records found</p></div>
+    if(!query || booksSearchedDetails.booksSearched.length === 0) return <div className='min-h-screen flex items-center justify-center'> <p className='text-red-600'>No records found</p></div>
     return (
         <div className="container mx-auto py-10 px-4 min-h-screen">
             <h2 className="text-4xl font-bold mb-6 text-center text-primary">Book Reviews</h2>

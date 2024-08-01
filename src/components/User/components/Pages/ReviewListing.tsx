@@ -22,9 +22,8 @@ const ReviewListing: React.FC = () => {
     const {currentPageContext , setCurrentPageContext } = useSearch()
 
     useEffect(() => {
-
         fetchReviews();
-    }, [currentPageContext]);
+    });
 
     const handleNavigation = (path: string) => {
         navigate(path);

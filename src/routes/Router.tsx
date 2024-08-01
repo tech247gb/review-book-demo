@@ -1,5 +1,4 @@
-// AppRouter.tsx
-import React, { Suspense } from 'react';
+import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom'; // Import BrowserRouter as Router
 import { AuthContextProvider } from '../context/AuthContext';
 import { SearchContextProvider } from '../context/SearchContext';
@@ -17,7 +16,7 @@ import UpdateReviewForm from '../components/User/components/Forms/UpdateReviewFo
 import NotFound from '../components/NotFound/NotFound';
 import SingleReview from '../components/SingleReview/SingleReview';
 import SearchResults from '../components/SearchResults/SearchResults';
-import BookReviews from '../components/BookList/BookReviews';
+import BookReviews from '../components/BookReviews/BookReviews';
 
 
 const AppRouter: React.FC = () => {
