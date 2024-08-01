@@ -104,7 +104,7 @@ const ReviewListing: React.FC = () => {
                         {reviews.length > 0 ? (
                             <div className="flex-1 overflow-x-auto">
                                 <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-                                    <thead className="bg-gray-800 text-white">
+                                    <thead className="bg-primary text-white">
                                         <tr>
                                             <th className="py-3 px-4 border-b text-left">Book Title</th>
                                             <th className="py-3 px-4 border-b text-left">Author</th>
@@ -124,7 +124,7 @@ const ReviewListing: React.FC = () => {
                                                     <div className="flex space-x-2">
                                                         <button
                                                             onClick={() => handleUpdate(review)}
-                                                            className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                                                            className="bg-primary text-white px-3 py-1 rounded hover:bg-yellow-600"
                                                         >
                                                             Update
                                                         </button>
