@@ -8,21 +8,22 @@ import { useAuthContext } from '../../context/AuthContext';
 
 const Header: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    // const [search, setSearch] = useState('');
+    const [search, setSearch] = useState('');
 
-    const { query, setSearchQuery, setCurrentPageContext ,handleSearchContext } = useSearch();
+    const { handleSearchContext ,setSearchQuery } = useSearch();
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const location = useLocation();
     const { isAuthenticated } = useAuthContext();
     const navigate = useNavigate();
-
-    // const handleSearchChange = (value: string) => {
-    //     // setSearchQuery(value);
-    // }
-
+    React.useEffect(() => {
+        if (location.pathname !== '/search'  &&   search) {
+            setSearch('');
+        }
+    }, [location.pathname]);
 
     const handleSearchSubmit = () => {
-        handleSearchContext(query ,1)
+        handleSearchContext(search ,1)
+        setSearchQuery(search)
         navigate(`/search`);
     }
 
@@ -50,8 +51,8 @@ const Header: React.FC = () => {
                             type="text"
                             placeholder="Search by titles or authors..."
                             className="px-3 py-1 rounded text-black w-full lg:w-auto"
-                            value={query}
-                            onChange={(e) => setSearchQuery(e.target.value)
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)
                             }
                         />
                         <button
