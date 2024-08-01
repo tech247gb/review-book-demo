@@ -36,7 +36,7 @@ const AppRouter: React.FC = () => {
                             </Route>
                             <Route element={<PrivateRoute />}>
                                 <Route path="/user/review-book" element={<ReviewForm />} />
-                                <Route path="/user/books" element={<BookList />} />
+                                {/* <Route path="/user/books" element={<BookList />} /> */}
                                 <Route path="/user/manage-profile" element={<ManageProfile />} />
                                 <Route path="/user/view-reviews" element={<ReviewListing />} />
                                 <Route path="/user/update-review/:id" element={<UpdateReviewForm />} />

@@ -23,7 +23,9 @@ const PAGE_SIZE = 6;
 
 const BookList: React.FC = () => {
     const { searchQuery } = useSearch();
-    const [currentPage, setCurrentPage] = useState(1);
+    // const [currentPage, setCurrentPage] = useState(1);
+    const { currentPageContext,setCurrentPageContext } = useSearch();
+
     const [books, setBooks] = useState<Book[]>([]);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState<boolean>(true)
@@ -35,7 +37,7 @@ const BookList: React.FC = () => {
                 const response = await axios.get(`${BACKEND_API_URL}/api/review/get-all-reviews`, {
                     params: {
                         searchKey: searchQuery,
-                        page: currentPage,
+                        page:  currentPageContext,
                         limit: PAGE_SIZE
                     }
                 });
@@ -59,11 +61,11 @@ const BookList: React.FC = () => {
         };
 
         fetchReviews();
-    }, [currentPage, searchQuery]);
+    }, [currentPageContext, searchQuery]);
 
     const handlePageChange = (page: number) => {
         if (page >= 1 && page <= totalPages) {
-            setCurrentPage(page);
+            setCurrentPageContext(page);
         }
     };
 
@@ -71,7 +73,7 @@ const BookList: React.FC = () => {
         <>
             <div className="container mx-auto px-4 mb-20 mt-10">
                 <h2 className="text-4xl font-bold mb-6 text-center text-primary">Reviews</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
                     {
                         loading ? (<LoadingSkeleton size={PAGE_SIZE} />) : (
                             <>
@@ -90,32 +92,35 @@ const BookList: React.FC = () => {
                                         </Link>
                                     ))
                                 ) : (
-                                    <p className="text-center text-gray-600">No reviews available.</p>
+                                    <p className="text-center justify-center text-gray-600">No reviews available.</p>
                                 )}
                             </>
                         )
                     }
 
                 </div>
-                <div className="mt-8 flex justify-around p-12">
-                    <button
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        disabled={currentPage === 1}
-                        className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
-                    >
-                        <FaArrowLeft />
-                    </button>
-                    <span className="text-gray-700">
-                        Page {currentPage} of {totalPages}
-                    </span>
-                    <button
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                        className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
-                    >
-                        <FaArrowRight />
-                    </button>
-                </div>
+                {books.length > 0 &&
+                    (<div className="mt-8 flex justify-around p-12">
+                        <button
+                            onClick={() => handlePageChange(currentPageContext - 1)}
+                            disabled={currentPageContext === 1}
+                            className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
+                        >
+                            <FaArrowLeft />
+                        </button>
+                        <span className="text-gray-700">
+                            Page {currentPageContext} of {totalPages}
+                        </span>
+                        <button
+                            onClick={() => handlePageChange(currentPageContext + 1)}
+                            disabled={currentPageContext === totalPages}
+                            className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
+                        >
+                            <FaArrowRight />
+                        </button>
+                    </div>
+                    )
+                }
             </div>
 
         </>

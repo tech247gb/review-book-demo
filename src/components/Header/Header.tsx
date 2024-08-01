@@ -7,9 +7,13 @@ import { useLocation } from 'react-router-dom';
 
 const Header: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const { searchQuery, setSearchQuery } = useSearch();
+    const { searchQuery, setSearchQuery ,setCurrentPageContext } = useSearch();
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const location = useLocation();
+    const handleSearch =(value :string) =>{
+        setSearchQuery(value)
+        setCurrentPageContext(1)
+    }
 
     return (
         <header className="header bg-primary text-white p-4">
@@ -35,7 +39,7 @@ const Header: React.FC = () => {
                                 placeholder="Search titles and authors..."
                                 className="px-3 py-1 rounded text-black w-full lg:w-auto"
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onChange={(e) => handleSearch(e.target.value)}
                             />
                         )}
                         <div className="relative lg:inline-block ml-3">
