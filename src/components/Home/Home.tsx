@@ -66,7 +66,7 @@ const Home: React.FC = () => {
             <FullScreenBanner backgroundImage={`/images/hero-background.jpg`} title={WELCOME_TEXT} subtitle={WELCOME_MESSAGE} />
 
             <section className="container mx-auto">
-                <h2 className="text-3xl font-bold mb-6 text-center animate__animated animate__fadeIn">{'Recent Reviews'}</h2>
+                <h2 className="text-3xl font-bold mb-6 text-center animate__animated animate__fadeIn mt-6">{'Recent Reviews'}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {
                         loading ? (<LoadingSkeleton size={RECENT_REVIEWS_LENGTH} />) : (
@@ -79,11 +79,6 @@ const Home: React.FC = () => {
                             ))
                         )
                     }
-                </div>
-                <div className="flex justify-center items-center mt-5">
-                    <Link to="/reviews" className="text-primary text-2xl mt-4 py-2 px-4 ">
-                        {'View all'}
-                    </Link>
                 </div>
             </section>
 
