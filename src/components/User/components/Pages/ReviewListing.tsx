@@ -81,7 +81,7 @@ const ReviewListing: React.FC = () => {
     };
 
     if (error) {
-        return <div className="w-full h-full p-6 text-center text-red-500">{error}</div>;
+        return <div className="w-full h-full p-6 text-center text-red-500 min-h-screen flex items-center justify-center">{error}</div>;
     }
 
     return (

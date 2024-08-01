@@ -53,7 +53,7 @@ const ReviewForm: React.FC = () => {
             setTimeout(() => {
                 setSuccess('');
                 navigate('/user/view-reviews');
-            }, 3000);
+            }, 1000);
         } catch (err) {
             // Handle error
             setError('Failed to add review. Please try again.');
