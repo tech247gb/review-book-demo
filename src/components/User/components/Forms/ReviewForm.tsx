@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -10,6 +11,7 @@ const ReviewForm: React.FC = () => {
     const [rating, setRating] = useState(1);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -50,6 +52,7 @@ const ReviewForm: React.FC = () => {
             // Hide success message after 3 seconds
             setTimeout(() => {
                 setSuccess('');
+                Navigate('/user/view-reviews');
             }, 3000);
         } catch (err) {
             // Handle error
