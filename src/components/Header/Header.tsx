@@ -22,9 +22,11 @@ const Header: React.FC = () => {
     }, [location.pathname]);
 
     const handleSearchSubmit = () => {
-        handleSearchContext(search ,1)
-        setSearchQuery(search)
-        navigate(`/search`);
+        if(search){
+            handleSearchContext(search ,1)
+            setSearchQuery(search)
+            navigate(`/search`);
+        }
     }
 
     return (
@@ -57,7 +59,8 @@ const Header: React.FC = () => {
                         />
                         <button
                             onClick={handleSearchSubmit}
-                            className="ml-2 px-3 py-1 bg-secondary text-white rounded"
+                            disabled={search ? false :true}
+                            className="ml-2 bg-white text-primary px-3 py-1 rounded "
                         >
                             Search
                         </button>
