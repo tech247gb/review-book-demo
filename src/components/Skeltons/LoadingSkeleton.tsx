@@ -12,7 +12,7 @@ const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({ size = 1, width }) =>
             {
                 Array(size).fill('').map((_) => {
                     return (
-                        <div className={`${width ? `bg-white w-${width}` : ''} max-w-sm rounded overflow-hidden shadow-lg`}>
+                        <div className={`${width ? `bg-white w-${width}` : ''} max-w-lg rounded overflow-hidden shadow-lg`}>
                             <div className="bg-gray-200 h-48 flex items-center justify-center">
                                 <Skeleton width={100} height={32} />
                             </div>
