@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book } from '../../Home/Home';
+import { Book } from '../../../types/Book';
 
 interface ModalProps {
   isOpen: boolean;

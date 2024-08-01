@@ -1,36 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import StarRating from '../StarRating/StarRating';
 import axios from 'axios';
 import { useSearch } from '../../context/SearchContext';
-import Spinner from '../Spinner/Spinner';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
-import { Link } from 'react-router-dom';
-import useDebounce from '../../hooks/useDebounce';
+import BookReviewCard from '../BookReviewCard/BookReviewCard';
+import Modal from '../Modal/Modal';
+import ReactPaginate from 'react-paginate';
+import { bookRandomCoverThemePicker } from '../../helpers/bookThemePicker.helper';
+import { Book } from '../../types/Book';
 
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
-interface Book {
-    id: number;
-    title: string;
-    author: string;
-    review: string;
-    coverImage: string;
-    rating: number;
-}
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 8;
 
 const BookList: React.FC = () => {
-    const { searchQuery } = useSearch();
-    // const [currentPage, setCurrentPage] = useState(1);
-    const { currentPageContext,setCurrentPageContext ,setSearchQuery } = useSearch();
-    const debouncedSearch = useDebounce(searchQuery, 1000);
 
+    const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+    const { currentPageContext, setCurrentPageContext ,setSearchQuery } = useSearch();
 
     const [books, setBooks] = useState<Book[]>([]);
-    const [totalPages, setTotalPages] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState<boolean>(true)
     useEffect(() => {
 
@@ -39,8 +30,7 @@ const BookList: React.FC = () => {
             try {
                 const response = await axios.get(`${BACKEND_API_URL}/api/review/get-all-reviews`, {
                     params: {
-                        searchKey: searchQuery,
-                        page:  currentPageContext,
+                        page: currentPageContext,
                         limit: PAGE_SIZE
                     }
                 });
@@ -50,13 +40,13 @@ const BookList: React.FC = () => {
                     title: review.title,
                     author: review.author,
                     review: review.reviewText,
-                    coverImage: `https://via.placeholder.com/400x600?text=${encodeURIComponent(review.title)}`,
+                    coverImage: `https://via.placeholder.com/${bookRandomCoverThemePicker()}?text=${encodeURIComponent(review.title)}`,
                     rating: review.rating,
                 }));
 
                 setBooks(fetchedReviews);
                 setLoading(false)
-                setTotalPages(Math.ceil(response.data.total / PAGE_SIZE));
+                setTotalPages(response.data.total);
             } catch (error) {
                 setLoading(false)
                 console.error('Error fetching reviews:', error);
@@ -64,77 +54,68 @@ const BookList: React.FC = () => {
         };
 
         fetchReviews();
-    }, [currentPageContext, debouncedSearch]);
-    
-    useEffect(()=>{
-        return () => {
-            setSearchQuery('')
-            setCurrentPageContext(1)
-        }
-        
-    },[])
+    }, [currentPageContext]);
 
-    const handlePageChange = (page: number) => {
-        if (page >= 1 && page <= totalPages) {
-            setCurrentPageContext(page);
-        }
+    // useEffect(() => {
+    //     return () => {
+    //         setSearchQuery('')
+    //         setCurrentPageContext(1)
+    //     }
+
+    // }, [])
+
+    const handlePageChange = (selectedPage: { selected: number }) => {
+        setCurrentPageContext(selectedPage.selected + 1);
+    };
+    const handleViewMore = (book: Book) => {
+        setSelectedBook(book);
     };
 
+    const handleCloseModal = () => {
+        setSelectedBook(null);
+    };
+
+
     return (
-        <>
-            <div className="container mx-auto px-4 mb-20 mt-10 min-h-screen">
-                <h2 className="text-4xl font-bold mb-6 text-center text-primary">Reviews</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
-                    {
-                        loading ? (<LoadingSkeleton size={PAGE_SIZE } minHeight={'min-h-[30rem]'} />) : (
-                            <>
-                                {books.length > 0 ? (
-                                    books.map((book, index) => (
-                                        <Link to={`/reviews/${book.id}`} >
-                                            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 min-h-[30rem]">
-                                                <img src={book.coverImage} alt={book.title} className="w-full h-48 object-cover" />
-                                                <div className="p-6">
-                                                    <h3 className="text-2xl font-semibold mb-2 text-gray-800">{book.title}</h3>
-                                                    <p className="text-gray-600 mb-1"><strong>Author:</strong> {book.author}</p>
-                                                    <StarRating rating={book.rating} />
-                                                    <p className="text-gray-800 mt-2 mb-6 line-clamp-3">{book.review}</p>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    ))
-                                ) : (
-                                    <p className="text-center justify-center text-gray-600">No reviews available.</p>
-                                )}
-                            </>
-                        )
-                    }
+        <div className="container mx-auto py-10 px-4">
+            <h2 className="text-4xl font-bold mb-6 text-center text-primary">Book Reviews</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {
+                    loading ? (<LoadingSkeleton size={PAGE_SIZE} />) :
 
-                </div>
-                {books.length > 0 &&
-                    (<div className="mt-8 flex justify-around p-12">
-                        <button
-                            onClick={() => handlePageChange(currentPageContext - 1)}
-                            disabled={currentPageContext === 1}
-                            className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
-                        >
-                            <FaArrowLeft />
-                        </button>
-                        <span className="text-gray-700">
-                            Page {currentPageContext} of {totalPages}
-                        </span>
-                        <button
-                            onClick={() => handlePageChange(currentPageContext + 1)}
-                            disabled={currentPageContext === totalPages}
-                            className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 disabled:opacity-50"
-                        >
-                            <FaArrowRight />
-                        </button>
-                    </div>
-                    )
-                }
+                        books.map((book) => (
+                            <BookReviewCard
+                                key={book.id}
+                                book={book}
+                                onViewMore={handleViewMore}
+                            />
+                        ))}
             </div>
-
-        </>
+            <div className="mt-8 flex justify-center">
+                {books.length > 0 && <ReactPaginate
+                    previousLabel={<FaChevronLeft className='w-6 h-6' />}
+                    nextLabel={<FaChevronRight className='w-6 h-6' />}
+                    breakLabel={'...'}
+                    pageCount={Math.ceil(totalPages / PAGE_SIZE)}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={3}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination'}
+                    pageClassName={'page-item'}
+                    pageLinkClassName={'page-link'}
+                    previousClassName={'page-item'}
+                    previousLinkClassName={'page-link'}
+                    nextClassName={'page-item'}
+                    nextLinkClassName={'page-link'}
+                    breakClassName={'page-item'}
+                    breakLinkClassName={'page-link'}
+                    activeClassName={'active'}
+                />}
+            </div>
+            {selectedBook && (
+                <Modal show={Boolean(selectedBook)} onClose={handleCloseModal} book={selectedBook} />
+            )}
+        </div>
     );
 };
 

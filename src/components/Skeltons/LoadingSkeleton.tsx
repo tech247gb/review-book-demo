@@ -13,23 +13,29 @@ const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({ size = 1, width, minH
             {
                 Array(size).fill('').map((_) => {
                     return (
-                        <div className={`${width ? `bg-white w-${width}` : ''} max-w-lg rounded overflow-hidden shadow-lg ${minHeight ?minHeight:``}`}>
-                            <div className="bg-gray-200 h-48 flex items-center justify-center">
-                                <Skeleton width={100} height={32} />
-                            </div>
-                            <div className="px-6 py-4">
-                                <div className="font-bold text-xl mb-2">
+                        <>
+                            <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
+                                <div className="relative">
+                                    <h3 className="text-2xl font-semibold mb-2 p-4 bg-white bg-opacity-75"> <Skeleton width={100} /></h3>
+                                    <div className="bg-gray-200 h-48 flex items-center justify-center">
+                                        <Skeleton width={100} height={32} />
+                                    </div>
+                                </div>
+                                <div className="p-6">
+                                    <div className="flex items-center mb-2">
                                     <Skeleton width={100} />
-                                </div>
-                                <p className="text-gray-700 text-base">
-                                    <Skeleton width={150} height={26} />
-                                </p>
-                                <div className="flex items-center">
-                                    <Skeleton width={20} height={20} />
-                                    <span className="ml-2 text-gray-500"><Skeleton width={30} /></span>
+                                        <p className="text-gray-600"> </p>
+                                        <div className="ml-auto">
+                                        <Skeleton width={100} />
+                                        </div>
+                                    </div>
+                                    <p className="text-gray-800 mt-2 mb-4"> <Skeleton width={100} /></p>
+                                    <div className="flex justify-center">
+                                    <Skeleton width={100} height={35} />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </>
                     )
                 })
             }

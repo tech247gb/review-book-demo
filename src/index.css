@@ -18,7 +18,7 @@
   padding: 8px 16px;
   text-decoration: none;
   background-color: #F0F0F0; /* Pagination background color */
-  color: #007bff; /* Pagination text color */
+  color: #3f8363; /* Pagination text color */
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -28,7 +28,7 @@
 }
 
 .active .page-link {
-  background-color: #C70039; /* Active page background color */
+  background-color: #3f8363; /* Active page background color */
   color: white; /* Active page text color */
 }
 
@@ -36,6 +36,61 @@
   color: #ccc;
   cursor: not-allowed;
 }
+body.modal-open {
+  overflow: hidden;
+}
+/* Modal container */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+}
+
+/* Modal content */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh; /* Adjust based on your needs */
+  overflow: hidden; /* Hide overflow for the container */
+  background: white;
+  border-radius: 8px;
+  padding: 16px 25px;
+  position: relative;
+  width: 90%;
+  max-width: 800px; /* Adjust based on your design */
+}
+
+/* Header section */
+.modal-header {
+  position: sticky; /* Keeps header at the top */
+  top: 0;
+  background: white;
+  z-index: 10;
+  margin-bottom: 16px; /* Space between header and body */
+}
+
+/* Scrollable content area */
+.modal-body {
+  overflow-y: scroll; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  max-height: calc(90vh - 180px); /* Adjust height based on header/footer */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari, Opera) */
+.modal-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.modal-body {
+  scrollbar-width: none;
+}
+
 
 @keyframes blink {
   0%, 80%, 100% {

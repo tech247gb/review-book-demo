@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileDropdown from '../User/components/DropDown/ProfileDropdown';
 import { useSearch } from '../../context/SearchContext';
@@ -8,9 +8,9 @@ import { useAuthContext } from '../../context/AuthContext';
 
 const Header: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [search, setSearch] = useState('');
+    // const [search, setSearch] = useState('');
 
-    const { query, setSearchQuery, setCurrentPageContext } = useSearch();
+    const { query, setSearchQuery, setCurrentPageContext ,handleSearchContext } = useSearch();
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const location = useLocation();
     const { isAuthenticated } = useAuthContext();
@@ -20,9 +20,9 @@ const Header: React.FC = () => {
     //     // setSearchQuery(value);
     // }
 
+
     const handleSearchSubmit = () => {
-        setCurrentPageContext(1)
-        setSearchQuery(search);
+        handleSearchContext(query ,1)
         navigate(`/search`);
     }
 
@@ -48,10 +48,10 @@ const Header: React.FC = () => {
                     <div className={`flex items-center lg:ml-4 mt-2 lg:mt-0 w-full lg:w-auto ${location.pathname === '/books' ? 'justify-between' : 'justify-end'}`}>
                         <input
                             type="text"
-                            placeholder="Search titles and authors..."
+                            placeholder="Search by titles or authors..."
                             className="px-3 py-1 rounded text-black w-full lg:w-auto"
-                            value={search}
-                            onChange={(e) =>  setSearch(e.target.value)
+                            value={query}
+                            onChange={(e) => setSearchQuery(e.target.value)
                             }
                         />
                         <button

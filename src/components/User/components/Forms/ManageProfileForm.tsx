@@ -55,7 +55,6 @@ const ManageProfile: React.FC = () => {
                         Authorization: `Bearer ${token}` // Attach the token if authentication is required
                     }
                 });
-                debugger
                 token = response.data.token;
                 const userDetails: any = jwtDecode(token);
                 localStorage.setItem('user', JSON.stringify(userDetails.data));
