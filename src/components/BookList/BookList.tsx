@@ -6,6 +6,7 @@ import Spinner from '../Spinner/Spinner';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
 import { Link } from 'react-router-dom';
+import useDebounce from '../../hooks/useDebounce';
 
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
@@ -25,6 +26,8 @@ const BookList: React.FC = () => {
     const { searchQuery } = useSearch();
     // const [currentPage, setCurrentPage] = useState(1);
     const { currentPageContext,setCurrentPageContext ,setSearchQuery } = useSearch();
+    const debouncedSearch = useDebounce(searchQuery, 1000);
+
 
     const [books, setBooks] = useState<Book[]>([]);
     const [totalPages, setTotalPages] = useState(1);
@@ -61,7 +64,7 @@ const BookList: React.FC = () => {
         };
 
         fetchReviews();
-    }, [currentPageContext, searchQuery]);
+    }, [currentPageContext, debouncedSearch]);
     
     useEffect(()=>{
         return () => {
