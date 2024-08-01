@@ -118,7 +118,7 @@ const ReviewListing: React.FC = () => {
                                             <tr key={review._id} className="hover:bg-gray-50">
                                                 <td className="py-4 px-4 border-b">{review.title}</td>
                                                 <td className="py-4 px-4 border-b">{review.author}</td>
-                                                <td className="py-4 px-4 border-b"><p>{review.reviewText}</p></td>
+                                                <td className="py-4 px-4 border-b"><p className='mb-6 whitespace-pre-line'>{review.reviewText}</p></td>
                                                 <td className="py-4 px-4 border-b">{review.rating} Star{review.rating > 1 ? 's' : ''}</td>
                                                 <td className="py-4 px-4 border-b">
                                                     <div className="flex space-x-2">
