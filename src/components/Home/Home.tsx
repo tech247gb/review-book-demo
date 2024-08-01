@@ -6,6 +6,7 @@ import BookReviewCard from '../BookReviewCard/BookReviewCard';
 import Modal from '../Modal/Modal';
 import FullScreenBanner from '../FullScreenBanner/FullScreenBanner';
 import { Book } from '../../types/Book';
+import { Link } from 'react-router-dom';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
                     title: review.title,
                     author: review.author,
                     review: review.reviewText,
-                    coverImage:review.imageUrl,
+                    coverImage: review.imageUrl,
                     rating: review.rating,
                 }));
                 const recent = [...fetchedReviews];
@@ -78,6 +79,11 @@ const Home: React.FC = () => {
                             ))
                         )
                     }
+                </div>
+                <div className="flex justify-center items-center mt-5">
+                    <Link to="/books" className="text-primary text-2xl mt-4 py-2 px-4 ">
+                        {'View all'}
+                    </Link>
                 </div>
             </section>
 
