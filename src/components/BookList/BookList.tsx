@@ -24,7 +24,7 @@ const PAGE_SIZE = 6;
 const BookList: React.FC = () => {
     const { searchQuery } = useSearch();
     // const [currentPage, setCurrentPage] = useState(1);
-    const { currentPageContext,setCurrentPageContext } = useSearch();
+    const { currentPageContext,setCurrentPageContext ,setSearchQuery } = useSearch();
 
     const [books, setBooks] = useState<Book[]>([]);
     const [totalPages, setTotalPages] = useState(1);
@@ -62,6 +62,14 @@ const BookList: React.FC = () => {
 
         fetchReviews();
     }, [currentPageContext, searchQuery]);
+    
+    useEffect(()=>{
+        return () => {
+            setSearchQuery('')
+            setCurrentPageContext(1)
+        }
+        
+    },[])
 
     const handlePageChange = (page: number) => {
         if (page >= 1 && page <= totalPages) {
