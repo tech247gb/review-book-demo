@@ -9,6 +9,7 @@ const ReviewForm: React.FC = () => {
     const [author, setAuthor] = useState('');
     const [reviewText, setReviewText] = useState('');
     const [rating, setRating] = useState(1);
+    const [imageUrl, setImageUrl] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const navigate = useNavigate();
@@ -31,6 +32,7 @@ const ReviewForm: React.FC = () => {
                     author,
                     reviewText,
                     rating,
+                    imageUrl,
                 },
                 {
                     headers: {
@@ -48,6 +50,7 @@ const ReviewForm: React.FC = () => {
             setAuthor('');
             setReviewText('');
             setRating(1);
+            setImageUrl('');
 
             // Hide success message after 3 seconds
             setTimeout(() => {
@@ -60,70 +63,88 @@ const ReviewForm: React.FC = () => {
             setSuccess('');
         }
     };
-
+    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        e.currentTarget.src = 'https://via.placeholder.com/400x600.png?text=No+Image'; // Fallback image URL
+    };
     return (
         <div className='h-screen flex items-center bg-slate-200'>
-        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full mx-auto">
-            {success && (
-                <p className="text-green-500 text-lg mb-4">{success}</p>
-            )}
-            {error && (
-                <p className="text-red-500 text-lg mb-4">{error}</p>
-            )}
-            <h2 className="text-3xl font-bold mb-6">Review a Book</h2>
-            <div className="mb-6">
-                <label htmlFor="bookTitle" className="block text-gray-700 mb-2">Book Title</label>
-                <input
-                    type="text"
-                    id="bookTitle"
-                    className="w-full p-2 border border-gray-300 rounded"
-                    value={bookTitle}
-                    onChange={(e) => setBookTitle(e.target.value)}
-                    required
-                />
-            </div>
-            <div className="mb-6">
-                <label htmlFor="author" className="block text-gray-700 mb-2">Author</label>
-                <input
-                    type="text"
-                    id="author"
-                    className="w-full p-2 border border-gray-300 rounded"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                    required
-                />
-            </div>
-            <div className="mb-6">
-                <label htmlFor="reviewText" className="block text-gray-700 mb-2">Review Text</label>
-                <textarea
-                    id="reviewText"
-                    className="w-full p-2 border border-gray-300 rounded"
-                    value={reviewText}
-                    onChange={(e) => setReviewText(e.target.value)}
-                    required
-                ></textarea>
-            </div>
-            <div className="mb-6">
-                <label htmlFor="rating" className="block text-gray-700 mb-2">Rating</label>
-                <select
-                    id="rating"
-                    className="w-full p-2 border border-gray-300 rounded"
-                    value={rating}
-                    onChange={(e) => setRating(Number(e.target.value))}
-                    required
+            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full mx-auto">
+                {success && (
+                    <p className="text-green-500 text-lg mb-4">{success}</p>
+                )}
+                {error && (
+                    <p className="text-red-500 text-lg mb-4">{error}</p>
+                )}
+                <h2 className="text-3xl font-bold mb-6">Review a Book</h2>
+                <div className="mb-6">
+                    <label htmlFor="bookTitle" className="block text-gray-700 mb-2">Book Title</label>
+                    <input
+                        type="text"
+                        id="bookTitle"
+                        className="w-full p-2 border border-gray-300 rounded"
+                        value={bookTitle}
+                        onChange={(e) => setBookTitle(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="mb-6">
+                    <label htmlFor="author" className="block text-gray-700 mb-2">Author</label>
+                    <input
+                        type="text"
+                        id="author"
+                        className="w-full p-2 border border-gray-300 rounded"
+                        value={author}
+                        onChange={(e) => setAuthor(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="mb-6">
+                    <label htmlFor="reviewText" className="block text-gray-700 mb-2">Review Text</label>
+                    <textarea
+                        id="reviewText"
+                        className="w-full p-2 border border-gray-300 rounded"
+                        value={reviewText}
+                        onChange={(e) => setReviewText(e.target.value)}
+                        required
+                    ></textarea>
+                </div>
+                <div className="mb-6">
+                    <label htmlFor="rating" className="block text-gray-700 mb-2">Rating</label>
+                    <select
+                        id="rating"
+                        className="w-full p-2 border border-gray-300 rounded"
+                        value={rating}
+                        onChange={(e) => setRating(Number(e.target.value))}
+                        required
+                    >
+                        {[1, 2, 3, 4, 5].map(star => (
+                            <option key={star} value={star}>{star} Star{star > 1 && 's'}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="mb-6">
+                    <label htmlFor="imageUrl" className="block text-gray-700 mb-2">Image URL</label>
+                    <input
+                        type="text"
+                        id="imageUrl"
+                        className="w-full p-2 border border-gray-300 rounded"
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
+                    />
+                </div>
+                {imageUrl && (
+                    <div className="mb-6">
+                        <img src={imageUrl} alt="Preview" className="w-full h-48 object-cover" onError={handleImageError} />
+                        {/* <img src={book.coverImage} alt={book.title} className="w-full h-48 object-cover" /> */}
+                    </div>
+                )}
+                <button
+                    type="submit"
+                    className="w-full bg-primary text-primaryText p-4 rounded hover:bg-opacity-80"
                 >
-                    {[1, 2, 3, 4, 5].map(star => (
-                        <option key={star} value={star}>{star} Star{star > 1 && 's'}</option>
-                    ))}
-                </select>
-            </div>
-            <button
-                type="submit"
-                className="w-full bg-primary text-primaryText p-4 rounded hover:bg-opacity-80"
-            >
-                Submit Review
-            </button>
-        </form>
+                    Submit Review
+                </button>
+            </form>
         </div>
     );
 };
