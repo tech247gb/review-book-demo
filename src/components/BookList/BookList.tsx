@@ -5,11 +5,13 @@ import { useSearch } from '../../context/SearchContext';
 import Spinner from '../Spinner/Spinner';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
+import { Link } from 'react-router-dom';
+
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 interface Book {
-    _id: number;
+    id: number;
     title: string;
     author: string;
     review: string;
@@ -39,7 +41,7 @@ const BookList: React.FC = () => {
                 });
 
                 const fetchedReviews = response.data.reviews.map((review: any) => ({
-                    id: review.id,
+                    id: review._id,
                     title: review.title,
                     author: review.author,
                     review: review.review,
@@ -75,6 +77,7 @@ const BookList: React.FC = () => {
                             <>
                                 {books.length > 0 ? (
                                     books.map((book, index) => (
+                                        <Link to={`/reviews/${book.id}`} >
                                         <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
                                             <img src={book.coverImage} alt={book.title} className="w-full h-48 object-cover" />
                                             <div className="p-6">
@@ -84,6 +87,7 @@ const BookList: React.FC = () => {
                                                 <p className="text-gray-800 mt-2 mb-6 whitespace-pre-line">{book.review}</p>
                                             </div>
                                         </div>
+                                        </Link>
                                     ))
                                 ) : (
                                     <p className="text-center text-gray-600">No reviews available.</p>
