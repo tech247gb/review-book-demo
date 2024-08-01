@@ -24,7 +24,7 @@ const PopupModal: React.FC<PopupModalPropos> = ({ isOpen, onClose, onConfirm, ti
         <div className="px-4 py-3 bg-white sm:px-6 sm:flex sm:flex-row-reverse">
           <button
             onClick={onConfirm}
-            className="bg-primary w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm"
+            className="bg-red-700 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm"
           >
             Confirm
           </button>

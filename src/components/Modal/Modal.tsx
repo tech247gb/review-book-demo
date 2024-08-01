@@ -45,7 +45,7 @@ const Modal: React.FC<ModalProps> = ({ show, onClose, book }) => {
                     </div>
                 </div>
                 <div className="modal-body">
-                    <p className="text-gray-700">{book.review}</p>
+                    <p className="text-gray-700 whitespace-pre-line">{book.review}</p>
                 </div>
             </div>
         </div>

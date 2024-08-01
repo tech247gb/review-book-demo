@@ -17,7 +17,7 @@ const PAGE_SIZE = 8;
 const BookList: React.FC = () => {
 
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-    const { currentPageContext, setCurrentPageContext ,setSearchQuery } = useSearch();
+    const { currentPageContext, setCurrentPageContext, setSearchQuery } = useSearch();
 
     const [books, setBooks] = useState<Book[]>([]);
     const [totalPages, setTotalPages] = useState(0);
@@ -55,13 +55,11 @@ const BookList: React.FC = () => {
         fetchReviews();
     }, [currentPageContext]);
 
-    // useEffect(() => {
-    //     return () => {
-    //         setSearchQuery('')
-    //         setCurrentPageContext(1)
-    //     }
-
-    // }, [])
+    useEffect(() => {
+        return () => {
+            setCurrentPageContext(1)
+        }
+    }, [])
 
     const handlePageChange = (selectedPage: { selected: number }) => {
         setCurrentPageContext(selectedPage.selected + 1);

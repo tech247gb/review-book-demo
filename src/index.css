@@ -90,6 +90,9 @@ body.modal-open {
 .modal-body {
   scrollbar-width: none;
 }
+.form-container {
+  min-height: calc(100vh - 140px);
+}
 
 
 @keyframes blink {

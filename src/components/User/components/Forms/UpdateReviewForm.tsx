@@ -55,7 +55,7 @@ const UpdateReviewForm: React.FC = () => {
     // };
 
     return (
-        <div className='min-h-[75rem] flex justify-center items-center bg-slate-200'>
+        <div className='form-container flex justify-center items-center bg-slate-200'>
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full mx-auto">
             {successMessage && (
                 <div className="bg-green-100 text-green-700 p-4 mb-4 rounded">
