@@ -4,22 +4,11 @@ import { WELCOME_MESSAGE, WELCOME_TEXT, FEATURED_REVIEWS } from '../../constants
 import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
 import BookReviewCard from '../BookReviewCard/BookReviewCard';
 import Modal from '../Modal/Modal';
-import { bookRandomCoverThemePicker } from '../../helpers/bookThemePicker.helper';
 import FullScreenBanner from '../FullScreenBanner/FullScreenBanner';
 import { Book } from '../../types/Book';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
-
-// export interface Book {
-//     id: number;
-//     title: string;
-//     author: string;
-//     review: string;
-//     coverImage: string;
-//     rating: number;
-//     featured?: boolean
-// }
 const PAGE_SIZE = 12
 const RECENT_REVIEWS_LENGTH = 8
 
@@ -44,7 +33,7 @@ const Home: React.FC = () => {
                     title: review.title,
                     author: review.author,
                     review: review.reviewText,
-                    coverImage: `https://via.placeholder.com/${bookRandomCoverThemePicker()}?text=${encodeURIComponent(review.title)}`,
+                    coverImage:review.imageUrl,
                     rating: review.rating,
                 }));
                 const recent = [...fetchedReviews];

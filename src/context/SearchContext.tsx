@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-import { bookRandomCoverThemePicker } from '../helpers/bookThemePicker.helper';
 import { Book } from '../types/Book';
 
 interface SearchContextProps {
@@ -8,7 +7,7 @@ interface SearchContextProps {
     setSearchQuery: (query: string) => void;
     currentPageContext: number;
     setCurrentPageContext: (page: number) => void;
-    handleSearchContext: (query: string ,page:number) => void;
+    handleSearchContext: (query: string, page: number) => void;
     booksSearchedDetails: SearchBookContext
 }
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
@@ -31,7 +30,7 @@ export const SearchContextProvider: React.FC<{ children: ReactNode }> = ({ child
         loading: false,
         totalPages: 0
     })
-    const handleSearchContext = async (query: string ,page:number) => {
+    const handleSearchContext = async (query: string, page: number) => {
         try {
             setBookSearchedDetails((prev) => {
                 return {
@@ -52,16 +51,11 @@ export const SearchContextProvider: React.FC<{ children: ReactNode }> = ({ child
                 title: review.title,
                 author: review.author,
                 review: review.reviewText,
-                coverImage: `https://via.placeholder.com/${bookRandomCoverThemePicker()}?text=${encodeURIComponent(review.title)}`,
+                coverImage: review.imageUrl,
                 rating: review.rating,
             }));
-
-            // setBooks(fetchedReviews);
-            // setLoading(false)
-            // setTotalPages(Math.ceil(response.data.total / PAGE_SIZE));
             setBookSearchedDetails({ booksSearched: fetchedReviews, loading: false, totalPages: response.data.total ?? 0 })
         } catch (error) {
-            // setLoading(false)
             setBookSearchedDetails((prev) => {
                 return {
                     ...prev,

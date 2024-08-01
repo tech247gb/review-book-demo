@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ImageThumb from '../../../ImageThumb/ImageThumb';
+import { title } from 'process';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -64,9 +65,9 @@ const ReviewForm: React.FC = () => {
             setSuccess('');
         }
     };
-    const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-        e.currentTarget.src = 'https://via.placeholder.com/400x600.png?text=No+Image'; // Fallback image URL
-    };
+    // const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    //     e.currentTarget.src = 'https://via.placeholder.com/400x600.png?text=No+Image'; // Fallback image URL
+    // };
     return (
         <div className='flex items-center bg-slate-200 min-h-screen'>
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full mx-auto">
@@ -134,7 +135,7 @@ const ReviewForm: React.FC = () => {
                     />
                 </div>
                 {imageUrl && (
-                    <ImageThumb imageUrl={imageUrl}/>
+                    <ImageThumb imageUrl={imageUrl} title={bookTitle}/>
                 )}
                 <button
                     type="submit"

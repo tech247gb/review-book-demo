@@ -6,7 +6,6 @@ import LoadingSkeleton from '../Skeltons/LoadingSkeleton';
 import BookReviewCard from '../BookReviewCard/BookReviewCard';
 import Modal from '../Modal/Modal';
 import ReactPaginate from 'react-paginate';
-import { bookRandomCoverThemePicker } from '../../helpers/bookThemePicker.helper';
 import { Book } from '../../types/Book';
 
 
@@ -40,7 +39,7 @@ const BookList: React.FC = () => {
                     title: review.title,
                     author: review.author,
                     review: review.reviewText,
-                    coverImage: `https://via.placeholder.com/${bookRandomCoverThemePicker()}?text=${encodeURIComponent(review.title)}`,
+                    coverImage: review.imageUrl,
                     rating: review.rating,
                 }));
 

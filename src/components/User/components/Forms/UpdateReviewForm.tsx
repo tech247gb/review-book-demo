@@ -120,7 +120,7 @@ const UpdateReviewForm: React.FC = () => {
                     />
                 </div>
                 {imageUrl && (
-                    <ImageThumb imageUrl={imageUrl}/>
+                    <ImageThumb imageUrl={imageUrl} title={title}/>
                 )}
 
             <button

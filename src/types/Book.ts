@@ -5,5 +5,6 @@ export interface Book {
     review: string;
     coverImage: string;
     rating: number;
-    featured?:boolean
+    featured?:boolean;
+    imageUrl?:string;
 }
