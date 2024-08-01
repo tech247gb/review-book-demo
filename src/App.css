@@ -36,19 +36,3 @@
     transform: rotate(360deg);
   }
 }
-/* Header Styles */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #333; /* Adjust as needed */
-  color: white;
-  z-index: 1000; /* Ensure it stays on top of other content */
-}
-
-/* Content Styles */
-.content {
-  padding-top: 600px;
-  padding-bottom: 60px; /* Adjust based on footer height */
-}
