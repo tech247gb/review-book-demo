@@ -77,7 +77,7 @@ const BookList: React.FC = () => {
 
 
     return (
-        <div className="container mx-auto py-10 px-4">
+        <div className="min-h-screen container mx-auto py-10 px-4">
             <h2 className="text-4xl font-bold mb-6 text-center text-primary">Book Reviews</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {

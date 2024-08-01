@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ImageThumb from '../../../ImageThumb/ImageThumb';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -67,7 +68,7 @@ const ReviewForm: React.FC = () => {
         e.currentTarget.src = 'https://via.placeholder.com/400x600.png?text=No+Image'; // Fallback image URL
     };
     return (
-        <div className='h-screen flex items-center bg-slate-200'>
+        <div className='flex items-center bg-slate-200'>
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full mx-auto">
                 {success && (
                     <p className="text-green-500 text-lg mb-4">{success}</p>
@@ -133,10 +134,7 @@ const ReviewForm: React.FC = () => {
                     />
                 </div>
                 {imageUrl && (
-                    <div className="mb-6">
-                        <img src={imageUrl} alt="Preview" className="w-full h-48 object-cover" onError={handleImageError} />
-                        {/* <img src={book.coverImage} alt={book.title} className="w-full h-48 object-cover" /> */}
-                    </div>
+                    <ImageThumb imageUrl={imageUrl}/>
                 )}
                 <button
                     type="submit"

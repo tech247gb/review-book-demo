@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ImageThumb from '../../../ImageThumb/ImageThumb';
 
 const BACKEND_API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
@@ -14,6 +15,8 @@ const UpdateReviewForm: React.FC = () => {
     const [reviewText, setReviewText] = useState(review?.reviewText || '');
     const [rating, setRating] = useState(review?.rating || 1);
     const [successMessage, setSuccessMessage] = useState('');
+    const [imageUrl, setImageUrl] = useState(review?.imageUrl || '');
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -28,6 +31,7 @@ const UpdateReviewForm: React.FC = () => {
                     author,
                     reviewText,
                     rating,
+                    imageUrl
                 }},
                 {
                     headers: {
@@ -46,6 +50,9 @@ const UpdateReviewForm: React.FC = () => {
             console.error('Failed to update review', err);
         }
     };
+    // const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    //     e.currentTarget.src = 'https://via.placeholder.com/400x600.png?text=No+Image'; // Fallback image URL
+    // };
 
     return (
         <div className='min-h-screen flex justify-center items-center bg-slate-200'>
@@ -102,6 +109,20 @@ const UpdateReviewForm: React.FC = () => {
                     ))}
                 </select>
             </div>
+            <div className="mb-6">
+                    <label htmlFor="imageUrl" className="block text-gray-700 mb-2">Image URL</label>
+                    <input
+                        type="text"
+                        id="imageUrl"
+                        className="w-full p-2 border border-gray-300 rounded"
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
+                    />
+                </div>
+                {imageUrl && (
+                    <ImageThumb imageUrl={imageUrl}/>
+                )}
+
             <button
                 type="submit"
                 className="w-full bg-primary text-white p-4 rounded-lg shadow-md hover:bg-primary-dark transition duration-300"
