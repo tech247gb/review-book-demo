@@ -11,10 +11,10 @@ const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({ size = 1, width, minH
     return (
         <>
             {
-                Array(size).fill('').map((_) => {
+                Array(size).fill('').map((_,index) => {
                     return (
-                        <>
-                            <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
+                        <React.Fragment key={index}>
+                            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
                                 <div className="relative">
                                     <h3 className="text-2xl font-semibold mb-2 p-4 bg-white bg-opacity-75"> <Skeleton width={100} /></h3>
                                     <div className="bg-gray-200 h-48 flex items-center justify-center">
@@ -35,7 +35,7 @@ const LoadingSkeleton: React.FC<LoadingSkeletonProps> = ({ size = 1, width, minH
                                     </div>
                                 </div>
                             </div>
-                        </>
+                        </React.Fragment>
                     )
                 })
             }
