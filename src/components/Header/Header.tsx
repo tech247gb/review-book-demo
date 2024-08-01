@@ -1,18 +1,29 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ProfileDropdown from '../User/components/DropDown/ProfileDropdown';
 import { useSearch } from '../../context/SearchContext';
 import { PROJECT_NAME } from '../../constants/ConstantTexts';
 import { useLocation } from 'react-router-dom';
+import { useAuthContext } from '../../context/AuthContext';
 
 const Header: React.FC = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const { searchQuery, setSearchQuery ,setCurrentPageContext } = useSearch();
+    const [search, setSearch] = useState('');
+
+    const { query, setSearchQuery, setCurrentPageContext } = useSearch();
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const location = useLocation();
-    const handleSearch =(value :string) =>{
-        setSearchQuery(value)
+    const { isAuthenticated } = useAuthContext();
+    const navigate = useNavigate();
+
+    // const handleSearchChange = (value: string) => {
+    //     // setSearchQuery(value);
+    // }
+
+    const handleSearchSubmit = () => {
         setCurrentPageContext(1)
+        setSearchQuery(search);
+        navigate(`/search`);
     }
 
     return (
@@ -32,16 +43,23 @@ const Header: React.FC = () => {
                 <nav className={`lg:flex ${menuOpen ? 'block' : 'hidden'} lg:items-center lg:space-x-4 w-full lg:w-auto`}>
                     <Link to="/" className="text-white hover:text-secondary block lg:inline-block mx-2 py-2">Home</Link>
                     <Link to="/books" className="text-white hover:text-secondary block lg:inline-block mx-2 py-2">Reviews</Link>
+                    {isAuthenticated && (<Link to="/user/view-reviews" className="text-white hover:text-secondary block lg:inline-block mx-2 py-2">My Reviews</Link>)}
+
                     <div className={`flex items-center lg:ml-4 mt-2 lg:mt-0 w-full lg:w-auto ${location.pathname === '/books' ? 'justify-between' : 'justify-end'}`}>
-                        {location.pathname === '/books' && (
-                            <input
-                                type="text"
-                                placeholder="Search titles and authors..."
-                                className="px-3 py-1 rounded text-black w-full lg:w-auto"
-                                value={searchQuery}
-                                onChange={(e) => handleSearch(e.target.value)}
-                            />
-                        )}
+                        <input
+                            type="text"
+                            placeholder="Search titles and authors..."
+                            className="px-3 py-1 rounded text-black w-full lg:w-auto"
+                            value={search}
+                            onChange={(e) =>  setSearch(e.target.value)
+                            }
+                        />
+                        <button
+                            onClick={handleSearchSubmit}
+                            className="ml-2 px-3 py-1 bg-secondary text-white rounded"
+                        >
+                            Search
+                        </button>
                         <div className="relative lg:inline-block ml-3">
                             <ProfileDropdown name={user.name} email={user.email} isAuthenticated={!!user} />
                         </div>

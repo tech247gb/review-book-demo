@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 interface SearchContextProps {
-    searchQuery: string;
+    query: string;
     setSearchQuery: (query: string) => void;
     currentPageContext :number;
      setCurrentPageContext :(page: number) => void;
@@ -10,11 +10,11 @@ interface SearchContextProps {
 const SearchContext = createContext<SearchContextProps | undefined>(undefined);
 
 export const SearchContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [query, setSearchQuery] = useState<string>('');
     const [currentPageContext, setCurrentPageContext] = useState<number>(1);
 
     return (
-        <SearchContext.Provider value={{ searchQuery, setSearchQuery ,currentPageContext, setCurrentPageContext}}>
+        <SearchContext.Provider value={{ query, setSearchQuery ,currentPageContext, setCurrentPageContext}}>
             {children}
         </SearchContext.Provider>
     );

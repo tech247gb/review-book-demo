@@ -17,7 +17,8 @@ import ReviewListing from '../components/User/components/Pages/ReviewListing';
 import UpdateReviewForm from '../components/User/components/Forms/UpdateReviewForm';
 import NotFound from '../components/NotFound/NotFound';
 import SingleReview from '../components/SingleReview/SingleReview';
-import Spinner from '../components/Spinner/Spinner';
+// import Spinner from '../components/Spinner/Spinner';
+import SearchResults from '../components/SearchResults/SearchResults';
 
 
 const AppRouter: React.FC = () => {
@@ -29,6 +30,7 @@ const AppRouter: React.FC = () => {
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/books" element={<BookList />} />
+                            <Route path="/search" element={<SearchResults />} />
                             <Route path="/reviews/:id" element={<SingleReview />} />
                             <Route element={<PublicRoute />}>
                                 <Route path="/login" element={<Login />} />
@@ -36,7 +38,6 @@ const AppRouter: React.FC = () => {
                             </Route>
                             <Route element={<PrivateRoute />}>
                                 <Route path="/user/review-book" element={<ReviewForm />} />
-                                {/* <Route path="/user/books" element={<BookList />} /> */}
                                 <Route path="/user/manage-profile" element={<ManageProfile />} />
                                 <Route path="/user/view-reviews" element={<ReviewListing />} />
                                 <Route path="/user/update-review/:id" element={<UpdateReviewForm />} />
