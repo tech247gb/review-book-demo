@@ -17,7 +17,6 @@ const BookReviewCard: React.FC<BookReviewCardProps> = ({ book, onViewMore }) => 
                     <h3 className="text-2xl font-semibold mb-2 p-4 bg-white bg-opacity-75">{book.title.length > 20 ?`${book.title.substr(0,20)}...` : book.title}</h3>
                     {book.featured && <FaHeart className="text-green-700 mr-2 w-6 h-6" title="Featured" />}
                 </div>}
-                {/* <img src={book.coverImage} alt={book.title} className="w-full h-48 object-cover" /> */}
                 <ImageThumb imageUrl={book.coverImage}/>
             </div>
             <div className="p-6">
